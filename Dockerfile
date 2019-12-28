@@ -13,10 +13,10 @@ RUN apk add --no-cache tzdata ; cp -vf /usr/share/zoneinfo/CET /etc/localtime ; 
 #install install minimal tools
 RUN apk add --no-cache zsh vim dos2unix tree wget curl git openssh
 
-# install oh-my-zsh
-RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-RUN cd /root ; mkdir -p .zsh/themes ; cd /root/.zsh/themes ; git clone https://github.com/sindresorhus/pure.git pure
-RUN ln -s /root/.zsh/themes/pure/pure.zsh /root/.oh-my-zsh/themes/pure.zsh-theme ; ln -s /root/.zsh/themes/pure/async.zsh /root/.oh-my-zsh/custom/async.zsh
+# install zim
+RUN cd /root/ ; git clone --recursive https://github.com/zimfw/zimfw.git ${ZDOTDIR:-${HOME}}/.zim
+ADD install-zim.sh /root/
+RUN chmod 755 /root/install-zim.sh ; cd /root ; /bin/zsh /root/install-zim.sh
 
 # install tmux
 RUN apk add --no-cache tmux
@@ -29,7 +29,6 @@ RUN chmod 700 /root/.tmux.conf ; tmux source /root/.tmux.conf >& /dev/null | tru
 #RUN tmux source /root/.tmux.conf
 
 # set some custom env
-ADD .zshrc /root/
 ADD .alias /root/
 #ADD .promptrc /root/
 ADD .vimrc /root/
@@ -37,12 +36,10 @@ ADD .inputrc /root/
 
 RUN unalias -a ;\
 #    echo ". .promptrc" >> /root/.bashrc ;\
-    chmod 700 /root/.zshrc    ;\
     chmod 700 /root/.alias    ;\
-#    chmod 700 /root/.promptrc ;\
     chmod 700 /root/.vimrc    ;\
     chmod 700 /root/.inputrc  ;\
-    chmod 700 /root/.zshrc
+    echo "source /root/.alias" >> /root/.zshrc
 
 
 
