@@ -34,13 +34,18 @@ ADD .alias /root/
 #ADD .promptrc /root/
 ADD .vimrc /root/
 ADD .inputrc /root/
+ADD .zshhistoryrc /root/
 
 RUN unalias -a ;\
 #    echo ". .promptrc" >> /root/.bashrc ;\
     chmod 700 /root/.alias    ;\
     chmod 700 /root/.vimrc    ;\
     chmod 700 /root/.inputrc  ;\
-    echo "source /root/.alias" >> /root/.zshrc
+    chmod 700 /root/.zshhistoryrc  ;\
+    echo "source /root/.alias"        >> /root/.zshrc ;\
+    echo "source /root/.zshhistoryrc" >> /root/.zshrc ;\
+    echo "cd \$HOME"                  >> /root/.zshrc
+
 
 ENV TERM=xterm-256color
 

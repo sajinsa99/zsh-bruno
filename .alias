@@ -1,6 +1,5 @@
 #shopt -s expand_aliases
-
-alias ls='ls --color=auto -hF'                                                                                                                                
+alias ls='ls --color=auto -hF'
 alias ll='ls -l'
 alias la='ll -a'
 alias lat='ll -at'
@@ -11,6 +10,34 @@ alias lss='ll -S'
 alias lssr='lss -r'
 alias lssa='lss -a'
 alias lssar='lssa -r'
-alias grep='grep --color=auto'
-#alias which='alias | /usr/bin/which  --show-dot --show-tilde'
 
+alias grep='grep --color=auto'
+alias tree='tree -CalqN -I .git'
+alias cpvu='rsync --progress -h -l -r -t -u -v'
+
+alias vi='/Applications/MacVim.app/Contents/MacOS/vim'
+
+
+alias sysinfo='system_profiler -detailLevel full'
+alias cpvu='rsync --progress -h -l -r -t -u -v'
+alias cpmir='rsync --progress -u -r -v -t -h -l --delete-after --delete'
+alias history='history -i'
+alias h='history'
+alias explorer='open'
+alias delofx='cd $HOME/Downloads ; ll *.ofx ; rm -vf *.ofx'
+
+alias brewupd='brew update && brew upgrade'
+
+alias nginxStart='brew services start nginx'
+alias nginxStop='brew services stop nginx'
+alias nginxRestart='echo ; echo stop nginx ; nginxStop ;echo ; echo start nginx ;  nginxStart ; echo'
+
+alias adaclean='gnatclean'
+alias adamake='gnatmake'
+
+alias backdoc='cd /Users/bfablet ; cpvu Documents /Volumes/BF-Documents/ >& docs.log &'
+alias backdownloads='cd /Users/bfablet ; cpvu Downloads /Volumes/BF-Downloads/ >& downloads.log &'
+alias backimpots='cd /Users/bfablet/Documents/PRIVATE/pers ; cpvu impots /Volumes/IMPOTS/ >& impots.log &'
+alias backsalaires='cd /Users/bfablet/Documents/PRIVATE/pers ; cpvu SAP /Volumes/SAP-SALAIRE >& salaires.log'
+
+alias clh='echo "" > ~/.zshhistory & exec $SHELL -l'
